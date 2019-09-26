@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yx.dao.UserMapper">
+    <resultMap id="base_result_map" type="com.yx.bean.User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
+        <result property="phone" column="phone"/>
+        <result property="question" column="question"/>
+        <result property="answer" column="answer"/>
+        <result property="role" column="role"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="base_sql">
+        id,username,password,email,phone,question,answer,role,create_time,update_time
+    </sql>
+
+    <!-- int checkByName(String name); -->
+    <select id="checkByName" resultType="int" parameterType="string">
+        select count(1)
+        from user
+        where username = #{name};
+    </select>
+
+    <!--List<User> getAllusers();-->
+    <select id="getAllusers" resultMap="base_result_map">
+        select * from user;
+    </select>
+
+    <!--User getUserByLogin(@Param("username") String username, @Param("password") String password);-->
+    <select id="getUserByLogin" resultMap="base_result_map">
+        select
+        <include refid="base_sql"/>
+        from user
+        where username = #{username} and password =#{password};
+    </select>
+
+    <!--int checkByEmail(String email);-->
+    <select id="checkByEmail" parameterType="string">
+        select count(1)
+        from user
+        where email = #{email};
+    </select>
+
+
+</mapper>
