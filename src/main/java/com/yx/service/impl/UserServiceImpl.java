@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
     public ServerResponse register(User user) {
         ServerResponse validResponse = checkValid(user.getUsername(), Const.USER_NAME);
         if (!validResponse.isSuccess()){
-
+            //todo
         }
         return null;
     }

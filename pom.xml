@@ -61,7 +61,7 @@
             <version>5.1.41</version>
         </dependency>
 
-        <!-- jstl,servlet-api,junit -->
+        <!-- jstl,servlet-api -->
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
@@ -110,7 +110,6 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.8.1</version>
         </dependency>
-
 
     </dependencies>
 
