@@ -20,4 +20,5 @@ public interface UserService {
     ServerResponse register(User user);
 
     ServerResponse checkValid(String str, String type);
+
 }

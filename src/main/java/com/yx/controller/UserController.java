@@ -42,18 +42,34 @@ public class UserController {
 
     @RequestMapping(value = "logout")
     @ResponseBody
-    public ServerResponse logout(HttpSession session){
+    public ServerResponse logout(HttpSession session) {
         session.removeAttribute(Const.CURRENT_USER);
         return ServerResponse.createBySuccessWithMsg("退出成功");
     }
 
     @RequestMapping(value = "register")
     @ResponseBody
-    public ServerResponse register(User user){
+    public ServerResponse register(User user) {
         return userService.register(user);
     }
 
+    @RequestMapping(value = "check_valid")
+    @ResponseBody
+    public ServerResponse checkValid(String str, String type) {
+        return userService.checkValid(str, type);
+    }
 
+    @RequestMapping(value = "get_user_info")
+    @ResponseBody
+    public ServerResponse getUserInfo(HttpSession session) {
+        //先判断该用户是否已经登录
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user != null) {
+            //从session中返回用户信息
+            return ServerResponse.createBySuccessWithData(user);
+        }
+        return ServerResponse.createByErrorWithMsg("用户未登录，请重新登录");
+    }
 
 
 }
